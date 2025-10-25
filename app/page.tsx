@@ -5,18 +5,24 @@ import React, { useMemo } from "react";
 const ROWS = 25; 
 const COLS = 28;
 
-function Tile({ r, c }) {
+type TileProps = {
+  r: number;
+  c: number;
+};
+
+function Tile({ r, c }: TileProps) {
   const edgeT = r === 0 ? " border-t" : "";
   const edgeL = c === 0 ? " border-l" : "";
 
-  const colors = ["#ff375f", "#ffd60a", "#0dd3ff", "#7cfc00", "#ff8a00"]; // pink, yellow, cyan, lime, orange
+  const colors = ["#ff375f", "#ffd60a", "#0dd3ff", "#7cfc00", "#ff8a00"];
   const color = colors[(r * 31 + c) % colors.length];
   const grad_color = `radial-gradient(ellipse, ${color}, #ffffff)`;
 
-  const handleEnter = (e) => {
+  const handleEnter = (e: React.MouseEvent<HTMLDivElement>) => {
     e.currentTarget.style.backgroundImage = grad_color;
   };
-  const handleLeave = (e) => {
+
+  const handleLeave = (e: React.MouseEvent<HTMLDivElement>) => {
     e.currentTarget.style.backgroundImage = "none";
   };
 
